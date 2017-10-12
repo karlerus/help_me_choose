@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<title>Help me choose!</title>
 		<link href="./main.css" rel="stylesheet" type="text/css">
+
 	</head>
 	<nav>
 		<ul>
@@ -13,36 +14,57 @@
 			<li><a href="#">Contact</a></li>
 		</ul>
 
-       <!-- A Search form is another commmon non-linear way to navigate through a website. -->
+<!-- A Search form is another commmon non-linear way to navigate through a website. 
 
 		<form>
 			<input type="search" name="q" placeholder="Search query">
-			<input type="submit" value="Go!"> <!-- different way of implemnting a button -->
-		</form>
+			<input type="submit" value="Go!">      different way of implemnting a button
+		</form> -->
 	</nav>
 	
 	<body>
-		<img src="./images/cruising.jpg" alt="boat" height="216" width="384">
-		<h1>Help me choose between...</h1>
+		<div class="grow">
+			<img src="./images/cruising.jpg" alt="boat" height="216" width="384">
+		</div>
+			<h1>Help me choose between...</h1>
+		
 		<div class="inputSection">
 			<div class="inputs">
 				<input placeholder="Something"></input>
 			</div>
 			<button class="addOption">Add</button>
 		</div>
-		<div class="resultSection"></div>
-		<button>Go!</button>
+		
+		<div class="resultSection">
+		
+		</div>
+		<button class="submit">Go!</button>
 		
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script>
 			$(function() {
-				$('.resultSection').hide()
+				$('.resultSection').hide() 
 				
 				var add_option = function() {
 					$('.inputs').append('<input></input>')
+					
+				}
+				$('.addOption').click(add_option)
+				
+				var options = []
+				var submit = function() {
+					$('.inputSection').hide()
+					$('.resultSection').css('display', 'flex')
+					$('input').each(function() {
+					options.push($(this).val())
+					})
+					var winner = options[Math.floor(Math.random() * options.length)]					<!-- math.random() math.floor() för att ta bort decimaler -->
+					console.log(winner)
+					$('h1').html("The winner is!")
+					$('.resultSection').text(winner)
 				}
 				
-				$('.addOption').click(add_option)
+				$('.submit').click(submit)
 			})
 		</script>
 	</body>
